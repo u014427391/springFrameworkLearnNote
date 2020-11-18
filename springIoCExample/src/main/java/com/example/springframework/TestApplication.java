@@ -1,9 +1,12 @@
 package com.example.springframework;
 
+
+
 import com.example.springframework.bean.A;
+import com.example.springframework.bean.SpringBean;
 import com.example.springframework.config.AppConfiguration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * <pre>
@@ -18,10 +21,35 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class TestApplication {
 
-    public static void main(String[] args) {
+    public static void testAnnotationConfigApplicationContext() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(AppConfiguration.class);
         context.refresh();
-        System.out.println(context.getBean(A.class));
+        SpringBean bean = context.getBean(SpringBean.class);
+        System.out.println(bean);
+    }
+
+    public static void testClassPathXmlApplicationContext() {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        SpringBean  springBean = context.getBean(SpringBean.class);
+        System.out.println(springBean);
+    }
+
+    public static void testCircularReferences() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(AppConfiguration.class);
+        //context.setAllowCircularReferences(false);
+        context.refresh();
+        A bean = context.getBean(A.class);
+        System.out.println(bean);
+    }
+
+    public static void main(String[] args) {
+        // 测试AnnotationConfigApplicationContext
+        //testAnnotationConfigApplicationContext();
+        // 测试ClassPathXmlApplicationContext
+        //testClassPathXmlApplicationContext();
+        // 测试Sprin循环依赖
+        testCircularReferences();
     }
 }
