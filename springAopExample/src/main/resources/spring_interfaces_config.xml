@@ -3,15 +3,28 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- 具体业务实现类（target Object）-->
+    <bean id="userServiceTarget" class="com.example.spring.aop.service.impl.UserServiceImpl"></bean>
+
     <!-- 实现MethodBeforeAdvice-->
     <bean id="logMethodBeforeAdvice" class="com.example.spring.aop.core.advice.LogMethodBeforeAdvice"></bean>
     <!-- 实现AfterReturningAdvice-->
     <bean id = "logAfterReturningAdvice" class="com.example.spring.aop.core.advice.LogAfterReturningAdvice"></bean>
 
-    <bean id="testProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <bean id="userServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- 配置代理接口 proxy-->
         <property name="proxyInterfaces">
             <list>
                 <value>com.example.spring.aop.service.UserService</value>
+            </list>
+        </property>
+        <!-- 配置目标对象，也就是被代理类，具体业务实现类-->
+        <property name="target" ref="userServiceTarget"></property>
+        <!-- 配置拦截器，可以配置advice、advisor、interceptor -->
+        <property name="interceptorNames">
+            <list>
+                <value>logMethodBeforeAdvice</value>
+                <value>logAfterReturningAdvice</value>
             </list>
         </property>
     </bean>

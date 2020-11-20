@@ -10,6 +10,7 @@
 
     <properties>
         <springframework.version>5.0.19.RELEASE</springframework.version>
+        <aspectj.version>1.9.4</aspectj.version>
     </properties>
 
     <dependencies>
@@ -19,9 +20,14 @@
             <version>${springframework.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <!--<dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.4</version>
-        </dependency>
+            <version>${aspectj.version}</version>
+        </dependency>-->
     </dependencies>
 </project>
