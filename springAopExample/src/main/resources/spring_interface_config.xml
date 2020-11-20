@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 实现MethodBeforeAdvice-->
+    <bean id="logMethodBeforeAdvice" class="com.example.spring.aop.core.advice.LogMethodBeforeAdvice"></bean>
+    <!-- 实现AfterReturningAdvice-->
+    <bean id = "logAfterReturningAdvice" class="com.example.spring.aop.core.advice.LogAfterReturningAdvice"></bean>
+
+    <bean id="testProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <list>
+                <value>com.example.spring.aop.service.UserService</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
