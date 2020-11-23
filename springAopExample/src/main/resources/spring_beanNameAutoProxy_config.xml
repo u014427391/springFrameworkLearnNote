@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 具体业务实现类（target Object）-->
+    <bean id="userServiceTarget" class="com.example.spring.aop.service.impl.UserServiceImpl"></bean>
+
+    <!-- 实现MethodBeforeAdvice-->
+    <bean id="logMethodBeforeAdvice" class="com.example.spring.aop.core.advice.LogMethodBeforeAdvice"></bean>
+    <!-- 实现AfterReturningAdvice-->
+    <bean id = "logAfterReturningAdvice" class="com.example.spring.aop.core.advice.LogAfterReturningAdvice"></bean>
+
+    <!-- 定义MethodInterceptor -->
+    <bean id="methodInterceptor" class="com.example.spring.aop.core.interceptor.TestMethodInterceptor"></bean>
+
+    <!-- 定义BeanNameAutoProxyCreator -->
+    <bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <!-- interceptorNames可以配置advice、advisor、interceptor-->
+        <property name="interceptorNames">
+            <list>
+                <value>logMethodBeforeAdvice</value>
+                <value>logAfterReturningAdvice</value>
+                <value>methodInterceptor</value>
+            </list>
+        </property>
+        <!-- 注意：beanNames这里是拦截对应的实现类bean id，eg：userServiceTarget-->
+        <property name="beanNames" value="*ServiceTarget"></property>
+    </bean>
+
+
+</beans>

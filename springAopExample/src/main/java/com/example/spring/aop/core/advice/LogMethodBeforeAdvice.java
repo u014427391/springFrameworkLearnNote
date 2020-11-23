@@ -18,6 +18,7 @@ import java.util.Arrays;
  */
 public class LogMethodBeforeAdvice implements MethodBeforeAdvice {
 
+    @Override
     public void before(Method method, Object[] args, Object target) throws Throwable {
         System.out.println(String.format("执行方法：%s，参数列表：%s", method.getName(), Arrays.toString(args) ));
     }

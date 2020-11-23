@@ -1,8 +1,10 @@
 package com.example.spring.aop.service;
 
+import com.example.spring.aop.bean.User;
+
 /**
  * <pre>
- *
+ *      UserService
  * </pre>
  *
  * <pre>
@@ -12,4 +14,8 @@ package com.example.spring.aop.service;
  * </pre>
  */
 public interface UserService {
+
+    User addUser(User user);
+
+    User getUser();
 }

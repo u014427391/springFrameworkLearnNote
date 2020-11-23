@@ -11,6 +11,23 @@
     <!-- 实现AfterReturningAdvice-->
     <bean id = "logAfterReturningAdvice" class="com.example.spring.aop.core.advice.LogAfterReturningAdvice"></bean>
 
+    <!-- 定义一个只会拦截查询方法的Advisor -->
+    <bean id="logOnlyObtainQueryAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <!-- 定义Advice类 -->
+        <property name="advice" ref="logMethodBeforeAdvice"></property>
+        <!-- 只有查询方法才会被拦截 -->
+        <property name="mappedNames" value="getUser"></property>
+    </bean>
+    <!-- 定义支持正则匹配的Advisor，只拦截查询方法-->
+    <bean id="regexpMethodAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="logMethodBeforeAdvice"></property>
+        <property name="pattern" value="com.example.spring.aop.*.service.*.get.*"></property>
+    </bean>
+
+    <!-- 定义MethodInterceptor -->
+    <bean id="methodInterceptor" class="com.example.spring.aop.core.interceptor.TestMethodInterceptor"></bean>
+
+
     <bean id="userServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
         <!-- 配置代理接口 proxy-->
         <property name="proxyInterfaces">
@@ -25,6 +42,9 @@
             <list>
                 <value>logMethodBeforeAdvice</value>
                 <value>logAfterReturningAdvice</value>
+                <!--<value>logOnlyObtainQueryAdvisor</value>-->
+                <!--<value>regexpMethodAdvisor</value>-->
+                <value>methodInterceptor</value>
             </list>
         </property>
     </bean>

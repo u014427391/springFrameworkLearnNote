@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
  */
 public class LogAfterReturningAdvice implements AfterReturningAdvice {
 
+    @Override
     public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
         System.out.println(String.format("方法返回：%s", returnValue ));
     }
