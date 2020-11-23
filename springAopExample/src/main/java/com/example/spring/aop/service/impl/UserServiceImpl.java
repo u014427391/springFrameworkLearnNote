@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService {
     public User getUser() {
         return user;
     }
+
+    @Override
+    public String findUserNameById(Long id) {
+        return "tom";
+    }
 }

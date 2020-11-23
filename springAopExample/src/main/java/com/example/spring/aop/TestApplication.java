@@ -2,8 +2,10 @@ package com.example.spring.aop;
 
 
 import com.example.spring.aop.bean.User;
+import com.example.spring.aop.config.AopConfiguration;
 import com.example.spring.aop.service.UserService;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestApplication {
@@ -28,10 +30,22 @@ public class TestApplication {
         System.out.println(String.format("用户数据打印:%s",userService.getUser().toString()));
     }
 
+    public static void testLogMonitoring() {
+        AnnotationConfigApplicationContext ioc = new AnnotationConfigApplicationContext();
+        // 注册配置类
+        ioc.register(AopConfiguration.class);
+        // 启动IOC容器
+        ioc.refresh();
+        UserService userService = (UserService) ioc.getBean("userService");
+        System.out.println(userService.findUserNameById(1L));
+    }
+
     public static void main(String[] args) {
         // ProxyFactoryBean
-        testAopProxy();
+        //testAopProxy();
         // BeanNameAutoProxyCreator
         //testBeanNameAutoProxy();
+        // logging monitoring
+        testLogMonitoring();
     }
 }

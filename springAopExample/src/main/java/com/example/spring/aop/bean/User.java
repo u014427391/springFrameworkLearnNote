@@ -1,6 +1,8 @@
 package com.example.spring.aop.bean;
 
+import com.example.spring.aop.annotation.Entity;
 
+@Entity
 public class User {
     private String username;
     private String password;
