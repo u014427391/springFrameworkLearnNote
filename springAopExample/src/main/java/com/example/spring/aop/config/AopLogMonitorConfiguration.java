@@ -14,7 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * <pre>
- *      AOP配置类
+ *      AOP日志监控配置类
  * </pre>
  *
  * <pre>
@@ -26,7 +26,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Configuration
 @Aspect
 @EnableAspectJAutoProxy
-public class AopConfiguration {
+public class AopLogMonitorConfiguration {
 
     @Pointcut("within(com.example.spring.aop..*) && execution(public String com.example.spring.aop.service.UserService.findUserNameById(Long, ..))")
     public void monitor(){ }
@@ -47,5 +47,6 @@ public class AopConfiguration {
     public UserService userService(){
         return new UserServiceImpl();
     }
+
 
 }
