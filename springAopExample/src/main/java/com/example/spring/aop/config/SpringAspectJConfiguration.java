@@ -25,7 +25,7 @@ import java.util.Date;
  * </pre>
  */
 @Configuration
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass = false)
 @Aspect
 public class SpringAspectJConfiguration {
 

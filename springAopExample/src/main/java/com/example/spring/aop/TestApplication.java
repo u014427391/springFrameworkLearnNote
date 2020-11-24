@@ -51,6 +51,16 @@ public class TestApplication {
         System.out.println(userService.findUserNameById(1L));
     }
 
+    public static void testSchemaBasedAop(){
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("classpath:spring_schemaBased_config.xml");
+        UserService userService = (UserService) ioc.getBean("userService");
+        User userDto = new User();
+        userDto.setUsername("tom");
+        userDto.setPassword("11");
+        userService.addUser(userDto);
+        System.out.println(String.format("用户数据打印:%s",userService.getUser().toString()));
+    }
+
     public static void main(String[] args) {
         // ProxyFactoryBean
         //testAopProxy();
@@ -59,6 +69,8 @@ public class TestApplication {
         // logging monitoring
         //testLogMonitoring();
         // spring AspectJ
-        testSpringAspectJ();
+        //testSpringAspectJ();
+        // schema Based config
+        testSchemaBasedAop();
     }
 }
