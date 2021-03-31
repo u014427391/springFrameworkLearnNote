@@ -7,6 +7,9 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -35,8 +38,16 @@ public class AccountServiceImpl extends JdbcDaoSupport implements AccountService
         this.transactionTemplate = transactionTemplate;
     }
 
-
     @Override
+    @Transactional(propagation= Propagation.REQUIRED , isolation = Isolation.DEFAULT)
+    public void transfer(final String outer,final String inner,final int money){
+        accountDao.out(outer , money);
+        // exception
+        int i = 1 / 0;
+        accountDao.in(inner , money);
+    }
+
+    /*@Override
     public void transfer(final String outer,final String inner,final int money){
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             @Override
@@ -47,7 +58,7 @@ public class AccountServiceImpl extends JdbcDaoSupport implements AccountService
                 accountDao.in(inner , money);
             }
         });
-    }
+    }*/
 
     @Override
     public void transferTrans(String outer, String inner, int money) {
