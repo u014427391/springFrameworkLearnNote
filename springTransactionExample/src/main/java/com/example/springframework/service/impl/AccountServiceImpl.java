@@ -73,7 +73,7 @@ public class AccountServiceImpl extends JdbcDaoSupport implements AccountService
         try {
             accountDao.out(outer , money);
             // exception
-            int i = 1 / 0;
+            //int i = 1 / 0;
             accountDao.in(inner , money);
             //commit
             dataSourceTransactionManager.commit(status);
