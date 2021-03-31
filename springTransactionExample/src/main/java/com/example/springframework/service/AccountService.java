@@ -15,4 +15,5 @@ public interface AccountService {
 
     void transfer(String outer,String inner,int money);
 
+    void transferTrans(String outer,String inner,int money);
 }

@@ -39,6 +39,7 @@
 
     <bean id="accountService" class="com.example.springframework.service.impl.AccountServiceImpl">
         <property name="accountDao" ref="accountDao"></property>
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
 
 </beans>

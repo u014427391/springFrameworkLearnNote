@@ -22,7 +22,8 @@ public class TestApplication {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         AccountService account = (AccountService) context.getBean("accountService");
-        account.transfer("Jack", "Tom", 1000);
+        //account.transfer("Jack", "Tom", 1000);
+        account.transferTrans("Jack", "Tom", 1000);
 
     }
 }
