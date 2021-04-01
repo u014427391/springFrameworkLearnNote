@@ -6,7 +6,7 @@
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://192.168.0.152:33306/test"></property>
+        <property name="url" value="jdbc:mysql://127.0.0.1:33306/test"></property>
         <property name="username" value="root"></property>
         <property name="password" value="minstone"></property>
         <!-- 配置初始化大小、最小、最大 -->
