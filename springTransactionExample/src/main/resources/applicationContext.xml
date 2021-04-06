@@ -42,7 +42,7 @@
         <property name="accountDao" ref="accountDao"></property>
         <property name="dataSource" ref="dataSource"></property>
     </bean>
-
+	<!-- Spring事务管理器配置 -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
@@ -54,11 +54,13 @@
         </tx:attributes>
     </tx:advice>-->
 
+    <!--<aop:config>
+     <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.example.springframework.service..*.*(..))"/>
+ </aop:config>-->
+
     <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
     <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
 
-    <!--<aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.example.springframework.service..*.*(..))"/>
-    </aop:config>-->
+
 
 </beans>

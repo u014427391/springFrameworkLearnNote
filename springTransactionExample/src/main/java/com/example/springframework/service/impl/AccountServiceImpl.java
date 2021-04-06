@@ -28,7 +28,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 @Service
 public class AccountServiceImpl extends JdbcDaoSupport implements AccountService {
 
-    AccountDao accountDao;
+    private AccountDao accountDao;
     private TransactionTemplate transactionTemplate;
 
     public void setAccountDao(AccountDao accountDao) {
